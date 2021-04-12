@@ -11,7 +11,7 @@ URL2 = 'https://www.amazon.in/Redgear-Blaze-backlit-keyboard-aluminium/dp/B073QQ
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0'}
 
-page = requests.get(URL2, headers = headers)
+page = requests.get(URL, headers = headers)
 def check_availability():
     soup = BeautifulSoup(page.content, 'html.parser')
     price = soup.find(id = "priceblock_ourprice")
@@ -32,4 +32,4 @@ def notify_ending(message):
 
 while(True):
     check_availability()
-    time.sleep(35)
+    time.sleep(3600)
