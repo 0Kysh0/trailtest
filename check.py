@@ -6,21 +6,18 @@ import time
 from os import environ
 from bs4 import BeautifulSoup
 
-URL = environ['amazon_link']
+URL = environ['nitro_link']
+URL2 = environ['predator_link']
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0'}
 
 page = requests.get(URL, headers = headers)
-def check_availability():
-    soup = BeautifulSoup(page.content, 'html.parser')
-    price = soup.find(id = "priceblock_ourprice")
-    if price == None:
-        print('It is still not available. Sadge')
-    else:
-        current_price = price.get_text()
-        mesge = f"The price is {current_price}"
-        notify_ending(mesge)
-        #send_mail() 
+page2 = requests.get(URL, headers = headers)
+
+soup = BeautifulSoup(page.content, 'html.parser')
+soup2 = BeautifulSoup(page2.content, 'html.parser')
+stock1 = soup.find(class_ = "product-info-stock-sku").get_text()
+stock2 = soup2.find(class_ = "product-info-stock-sku").get_text()
 
 def notify_ending(message):
     token = environ['telegram_token']
@@ -30,5 +27,8 @@ def notify_ending(message):
     bot.sendMessage(chat_id=chat_id, text=message)
 
 while(True):
-    check_availability()
-    time.sleep(3600)
+    if stock2.strip() != "Coming Soon" or stock1.strip() !="Coming Soon":
+        notify_ending('One of them is in stock!')
+    else:
+        print('Still same')
+    time.sleep(7200)
