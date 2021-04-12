@@ -30,6 +30,6 @@ def notify_ending(message):
     bot = telegram.Bot(token=token)
     bot.sendMessage(chat_id=chat_id, text=message)
 
-while(true):
+while(True):
     check_availability()
     time.sleep(35)
