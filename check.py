@@ -2,6 +2,7 @@ import requests
 import json
 import telegram
 import os
+import time
 from os import environ
 from bs4 import BeautifulSoup
 
@@ -29,9 +30,6 @@ def notify_ending(message):
     bot = telegram.Bot(token=token)
     bot.sendMessage(chat_id=chat_id, text=message)
 
-check_availability()
-# with open('./getUpdates.json', 'r') as keys_file:
-#         k = json.load(keys_file)
-#         token = k['telegram_token']
-#         chat_id = k['telegram_chat_id']
-#         print(token)    
+while(true):
+    check_availability()
+    time.sleep(35)
