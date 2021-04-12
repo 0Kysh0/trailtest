@@ -1,6 +1,8 @@
 import requests
 import json
 import telegram
+import os
+from os import environ
 from bs4 import BeautifulSoup
 
 URL = 'https://www.amazon.in/ASUS-GeForce-RTX-3060-Graphics-Graphite-FA506QM-HN008TS/dp/B08XBSV648'
@@ -21,10 +23,8 @@ def check_availability():
         #send_mail() 
 
 def notify_ending(message):
-    with open('./getUpdates.json', 'r') as keys_file:
-        k = json.load(keys_file)
-        token = k['telegram_token']
-        chat_id = k['telegram_chat_id']    
+    token = environ['telegram_token']
+    chat_id = environ['telegram_chat_id']    
     
     bot = telegram.Bot(token=token)
     bot.sendMessage(chat_id=chat_id, text=message)
