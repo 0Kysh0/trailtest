@@ -31,4 +31,4 @@ while(True):
         notify_ending('One of them is in stock!')
     else:
         print('Still same')
-    time.sleep(7200)
+    time.sleep(300)
