@@ -26,9 +26,10 @@ def notify_ending(message):
     bot = telegram.Bot(token=token)
     bot.sendMessage(chat_id=chat_id, text=message)
 
-while(True):
-    if stock2.strip() != "Coming Soon" or stock1.strip() !="Coming Soon":
-        notify_ending('One of them is in stock!')
-    else:
-        print('Still same')
-    time.sleep(300)
+# while(True):
+#     if stock2.strip() != "Coming Soon" or stock1.strip() !="Coming Soon":
+#         notify_ending('One of them is in stock!')
+#     else:
+#         print('Still same')
+#     time.sleep(300)
+print(f"{stock1} {stock2}")
