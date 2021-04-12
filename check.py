@@ -6,8 +6,7 @@ import time
 from os import environ
 from bs4 import BeautifulSoup
 
-URL = 'https://www.amazon.in/ASUS-GeForce-RTX-3060-Graphics-Graphite-FA506QM-HN008TS/dp/B08XBSV648'
-URL2 = 'https://www.amazon.in/Redgear-Blaze-backlit-keyboard-aluminium/dp/B073QQR2H2/'
+URL = environ['amazon_link']
 
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0'}
 
