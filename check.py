@@ -13,7 +13,7 @@ headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gec
 page = requests.get(URL, headers = headers)
 
 soup = BeautifulSoup(page.content, 'html.parser')
-stock = soup.find(class_ = "product-info-stock-sku").get_text()
+stock = soup.find(id = "priceblock_ourprice")
 
 def notify_ending(message):
     token = environ['telegram_token']
@@ -22,9 +22,9 @@ def notify_ending(message):
     bot = telegram.Bot(token=token)
     bot.sendMessage(chat_id=chat_id, text=message)
 
-while(True) :
-    if stock.strip() != "Coming Soon":
-        notify_ending('It is in stock!')
+while(True):
+    if stock is None:
+        print('Not in stock. Sad')
     else:
-        print('Still same')
-        time.sleep(300)
+        notify_ending(f" Laptop's up for grabs! Price is {float(stock.get_text().replace(',','')[2:])}")
+    time.sleep(50)
